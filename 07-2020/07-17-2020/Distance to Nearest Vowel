@@ -1,0 +1,43 @@
+https://edabit.com/challenge/b9FBAhxaijR9fzxgo
+
+Write a function that takes in a string and for each character, returns the distance to the nearest vowel. If the character is a vowel itself, return 0.
+
+Examples
+distanceToNearestVowel("aaaaa") ➞ [0, 0, 0, 0, 0]
+
+distanceToNearestVowel("babbb") ➞ [1, 0, 1, 2, 3]
+
+distanceToNearestVowel("abcdabcd") ➞ [0, 1, 2, 1, 0, 1, 2, 3]
+
+distanceToNearestVowel("shopper") ➞ [2, 1, 0, 1, 1, 0, 1]
+Notes
+All input strings will contain at least one vowel.
+Strings will be lowercased.
+Vowels are: a, e, i, o, u.
+
+function distanceToNearestVowel(str) {
+	const vowels = {'a':1,
+							 'e':1,
+							 'i':1,
+							 'o':1,
+							 'u':1
+							};
+	
+	const strArr = str.split('');
+	const vowelIndexes = [];
+	
+	for (let i = 0; i < strArr.length; i++) {
+		if(vowels[strArr[i]]) {
+			strArr[i] = 0;
+			vowelIndexes.push(i);
+		}
+	};
+	
+	return strArr.map((letter, i)=> {
+		if(letter === 0) {
+			return 0
+		}
+			return Math.min(...vowelIndexes.map(num=>Math.abs(i-num)))
+	})
+	
+}
