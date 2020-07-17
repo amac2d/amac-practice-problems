@@ -1,0 +1,36 @@
+https://edabit.com/challenge/XcfmvhpRp4t3tQWG2
+
+There are many different styles of music and many albums exhibit multiple styles. Create a function that takes an array of musical styles from albums and returns how many styles are unique.
+
+Examples
+uniqueStyles([
+  "Dub, Dancehall",
+  "Industrial, Heavy Metal",
+  "Techno, Dubstep",
+  "Synth-pop, Euro-Disco",
+  "Industrial, Techno, Minimal"
+]) ➞ 9
+
+uniqueStyles([
+  "Soul",
+  "House, Folk",
+  "Trance, Downtempo, Big Beat, House",
+  "Deep House",
+  "Soul"
+]) ➞ 7
+Notes
+N/A
+
+function uniqueStyles(albums) {
+	const map = {};
+	let count = 0;
+	for(let i = 0; i < albums.length; i++) {
+		albums[i].split(',').forEach(style=> {
+			if (!map[style]) {
+				map[style] = 1;
+				count++;
+			}
+		})
+	}
+	return count
+}
