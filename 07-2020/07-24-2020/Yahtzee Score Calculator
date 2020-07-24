@@ -1,0 +1,117 @@
+ // https://edabit.com/challenge/4amPBJxbKN3ufTGm5
+
+function yahtzeeScoreCalc(arr) {
+    //start at 250am
+    let counter = 1;
+	let totalPoints = 0;
+	// turn 1-6
+	for (let i = 1; i <= 6; i++) {
+		arr[i-1].forEach(num=>{
+			if(num === i) {
+				totalPoints += i;
+			}
+        });
+        console.log(totalPoints, counter++);
+    }
+    if(totalPoints >= 63) {
+        totalPoints += 35;
+    }
+	// turn 7
+    totalPoints += checkThrees(arr[6]);
+    console.log(totalPoints, counter++);
+	// turn 8
+    totalPoints += checkFours(arr[7]);
+    console.log(totalPoints, counter++);
+    // turn 9
+    totalPoints += checkFullHouse(arr[8]);
+    console.log(totalPoints, counter++);
+    // turn 10
+    totalPoints += checkLowerStraight(arr[9]);
+    console.log(totalPoints, counter++);
+    // turn 11
+    totalPoints += checkHigherStraight(arr[10]);
+    console.log(totalPoints, counter++);
+    // turn 12
+    totalPoints += checkYahtzee(arr[11]);
+    console.log(totalPoints, counter++);
+    // turn 13
+    totalPoints += arr[12].reduce((acc, cv)=>acc+cv);
+    console.log(totalPoints, counter++);
+	
+	
+	
+	return totalPoints;
+}
+
+const checkThrees = arr => {
+	let points = 0;
+	let check = false;
+	const threesMap = {};
+	for(let i = 0; i < arr.length; i++) {
+		const num = arr[i];
+		points += num;
+		if(threesMap[num]) {
+			threesMap[num]++;
+			if(threesMap[num] === 3) {
+				check = true;
+			}
+		} else {
+			threesMap[num] = 1;
+		}
+	}
+	return check ? points : 0;
+}
+
+const checkFours = arr => {
+	let points = 0;
+	let check = false;
+	const foursMap = {};
+	for(let i = 0; i < arr.length; i++) {
+		const num = arr[i];
+		points += num;
+		if(foursMap[num]) {
+			foursMap[num]++;
+			if(foursMap[num] === 4) {
+				check = true;
+			}
+		} else {
+			foursMap[num] = 1;
+		}
+	}
+	return check ? points : 0;
+}
+
+// not finished
+const checkFullHouse = arr => {
+    const fullHouseSet = new Set(arr);
+    if (fullHouseSet.size === 2) {
+        return 25;
+    }
+    return 0;
+}
+
+// not finished
+const checkLowerStraight = arr => {
+    const checkSet = new Set(arr);
+    if (checkSet.size > 4) {
+        return 30;
+    }
+    return 0;
+}
+
+// not finished
+const checkHigherStraight = arr => {
+    const checkSet = new Set(arr);
+    if (checkSet.size >= 5) {
+        return 40;
+    }
+    return 0;
+}
+
+const checkYahtzee = arr => {
+    const checkSet = new Set(arr);
+    if (checkSet.size === 1) {
+        return 50;
+    }
+    return 0;
+}
