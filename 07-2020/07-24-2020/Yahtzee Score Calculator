@@ -1,7 +1,9 @@
  // https://edabit.com/challenge/4amPBJxbKN3ufTGm5
+     //start at 250am
+    //finshed 430am
+    //incomplete, check comments
 
 function yahtzeeScoreCalc(arr) {
-    //start at 250am
     let counter = 1;
 	let totalPoints = 0;
 	// turn 1-6
